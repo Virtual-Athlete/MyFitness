@@ -20,10 +20,10 @@ class WorkoutDetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val workoutAdapter = WorkoutViewAdapter()
-        list_exercise_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-        list_exercise_recycler_view.adapter = workoutAdapter
-        list_exercise_recycler_view.setHasFixedSize(true)
+        val workoutSetAdapter = WorkoutSetViewAdapter()
+        list_workout_sets_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        list_workout_sets_recycler_view.adapter = workoutSetAdapter
+        list_workout_sets_recycler_view.setHasFixedSize(true)
     }
 
     override fun onPause() {

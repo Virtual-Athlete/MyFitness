@@ -1,39 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        
-        <LinearLayout
-            android:id="@+id/header_linear_layout"
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:orientation="horizontal"
-            android:background="#C0F9595B"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:text="10 WORK SETS"
-                android:textColor="@android:color/white"
-                android:gravity="center_vertical"/>
-        </LinearLayout>
+                android:id="@+id/title_workout_set"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="WORKOUT A"/>
+
+            <!-- HEADER -->
+            <LinearLayout
+                android:id="@+id/header_linear_layout"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:orientation="horizontal"
+                android:background="#C0F9595B"
+                app:layout_constraintTop_toBottomOf="@+id/title_workout_set"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:text="10 WORK SETS"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:text="60 % WORK LOAD"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:gravity="center_vertical|end"/>
+
+            </LinearLayout>
+            <!-- HEADER END -->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list_exercise_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/header_linear_layout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:listitem="@layout/list_exercise"/>
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
-
-
-
 </android.support.constraint.ConstraintLayout>
