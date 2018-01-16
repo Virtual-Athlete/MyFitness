@@ -104,7 +104,7 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_check_black_24dp"
+        android:src="@drawable/ic_check_white_24dp"
         app:backgroundTint="@color/colorAccent"
         app:layout_anchor="@+id/app_bar_layout"
         app:layout_anchorGravity="bottom|end"/>

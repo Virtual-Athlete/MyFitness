@@ -53,7 +53,7 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
             itemView.title_workout_text_view.text = "Intervals"
             itemView.title_workout_type_text_view.text = "80% Metabolic"
             itemView.workout_constraint_layout.setOnClickListener({ view ->
-                (view.context as Activity).fragmentManager.beginTransaction().replace(R.id.fragment_frame_layout, WorkoutDetailFragment()).commit();
+                (view.context as Activity).fragmentManager.beginTransaction().replace(R.id.fragment_frame_layout, WorkoutDetailFragment()).addToBackStack(WorkoutDetailFragment::class.java.simpleName).commit();
             })
         }
     }

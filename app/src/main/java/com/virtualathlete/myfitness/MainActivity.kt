@@ -14,7 +14,7 @@ class MainActivity @Inject constructor() : DaggerAppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 //message.setText(R.string.title_home)
-                fragmentManager.beginTransaction().replace(R.id.fragment_frame_layout, feedFragment).addToBackStack(FeedFragment::class.simpleName).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_frame_layout, feedFragment);
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
