@@ -38,7 +38,7 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
     }
 
     override fun getItemCount(): Int {
-        return 9
+        return 19
     }
 
     inner class HeaderViewHolder (itemView: View) : BaseViewHolder(itemView) {
