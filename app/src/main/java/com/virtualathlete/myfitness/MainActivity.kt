@@ -2,6 +2,8 @@ package com.virtualathlete.myfitness
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import com.virtualathlete.myfitness.feed.FeedFragment
+import com.virtualathlete.myfitness.feed.WorkoutDetailFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject

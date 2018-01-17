@@ -2,10 +2,10 @@ package com.virtualathlete.myfitness
 
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.virtualathlete.myfitness.feed.WorkoutDetailFragment
 import kotlinx.android.synthetic.main.list_item_workout.view.*
 import kotlinx.android.synthetic.main.list_item_workout_header.view.*
 

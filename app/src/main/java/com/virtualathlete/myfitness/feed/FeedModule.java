@@ -1,6 +1,7 @@
-package com.virtualathlete.myfitness;
+package com.virtualathlete.myfitness.feed;
 
 import com.virtualathlete.myfitness.di.FragmentScoped;
+import com.virtualathlete.myfitness.feed.FeedFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -10,7 +11,7 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class MainModule {
+public abstract class FeedModule {
     @FragmentScoped
     @ContributesAndroidInjector
     abstract FeedFragment feedFragment();

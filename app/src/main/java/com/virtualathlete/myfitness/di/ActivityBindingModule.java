@@ -1,7 +1,8 @@
 package com.virtualathlete.myfitness.di;
 
 import com.virtualathlete.myfitness.MainActivity;
-import com.virtualathlete.myfitness.MainModule;
+import com.virtualathlete.myfitness.complete.CompleteActivity;
+import com.virtualathlete.myfitness.feed.FeedModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -13,6 +14,10 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBindingModule {
     @ActivityScoped
-    @ContributesAndroidInjector(modules = {MainModule.class})
+    @ContributesAndroidInjector(modules = {FeedModule.class})
     abstract MainActivity mainActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = {})
+    abstract CompleteActivity completeActivity();
 }
