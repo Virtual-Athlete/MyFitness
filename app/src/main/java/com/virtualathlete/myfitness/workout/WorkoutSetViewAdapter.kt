@@ -1,4 +1,4 @@
-package com.virtualathlete.myfitness.feed
+package com.virtualathlete.myfitness.workout
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.virtualathlete.myfitness.ExerciseViewAdapter
 import com.virtualathlete.myfitness.R
 import kotlinx.android.synthetic.main.list_item_workout_set.view.*
 

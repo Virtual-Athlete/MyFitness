@@ -20,6 +20,9 @@
         </activity>
 
         <activity
+            android:name=".workout.WorkoutDetailActivity"
+            android:theme="@style/AppTheme.Transparent"/>
+        <activity
             android:name=".complete.CompleteActivity"
             android:theme="@style/AppTheme.Transparent"/>
     </application>

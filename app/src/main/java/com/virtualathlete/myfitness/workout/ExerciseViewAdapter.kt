@@ -1,10 +1,11 @@
-package com.virtualathlete.myfitness
+package com.virtualathlete.myfitness.workout
 
 import android.graphics.BitmapFactory
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.virtualathlete.myfitness.R
 import kotlinx.android.synthetic.main.list_exercise.view.*
 
 /**
