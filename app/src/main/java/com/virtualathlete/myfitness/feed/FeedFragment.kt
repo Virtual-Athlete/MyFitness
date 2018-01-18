@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.transition.Explode
+import android.transition.Fade
 import android.transition.Transition
 import android.view.LayoutInflater
 import android.view.View
@@ -32,18 +33,17 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
     override fun onResume() {
         super.onResume()
         val workoutAdapter = WorkoutViewAdapter()
+        workoutAdapter.setOnClickItemListener(this)
         list_workout_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
         list_workout_recycler_view.adapter = workoutAdapter
         list_workout_recycler_view.setHasFixedSize(true)
     }
 
     override fun onClickItem(view: View) {
-        val explode: Transition = Explode()
-        //explode.excludeTarget(android.R.id.statusBarBackground, true)
-        //explode.excludeTarget(android.R.id.navigationBarBackground, true)
-        activity.window.exitTransition = explode
-        //window.allowEnterTransitionOverlap = true
-        //activity.window.allowReturnTransitionOverlap = true
+        val fade: Transition = Fade()
+        fade.excludeTarget(android.R.id.statusBarBackground, true)
+        fade.excludeTarget(android.R.id.navigationBarBackground, true)
+        activity.window.exitTransition = fade
         val intent = Intent(activity, WorkoutDetailActivity::class.java)
 
         startActivity(intent,
