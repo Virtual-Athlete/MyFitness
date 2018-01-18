@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.view.Window
 import android.view.animation.LinearInterpolator
 import android.widget.LinearLayout
 import com.virtualathlete.myfitness.R

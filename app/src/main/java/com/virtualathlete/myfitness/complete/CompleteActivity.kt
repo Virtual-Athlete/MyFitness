@@ -72,7 +72,7 @@ class CompleteActivity @Inject constructor(): DaggerAppCompatActivity() {
         circularReveal.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 rootLayout.visibility = View.INVISIBLE
-                finish()
+                finishAfterTransition()
             }
         })
 

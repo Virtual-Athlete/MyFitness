@@ -43,6 +43,7 @@
             android:id="@+id/list_workout_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
             android:nestedScrollingEnabled="false"
             tools:listitem="@layout/list_item_workout"/>
     </android.support.v4.widget.NestedScrollView>

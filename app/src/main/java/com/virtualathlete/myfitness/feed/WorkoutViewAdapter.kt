@@ -1,11 +1,15 @@
 package com.virtualathlete.myfitness.feed
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.RecyclerView
 import android.transition.Explode
+import android.transition.Fade
+import android.transition.Slide
+import android.transition.Transition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +27,7 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
 
     private val headerView = 0
     private val workoutView = 1
+    private var event: OnClickItemListener? = null
 
     override fun getItemViewType(position: Int): Int {
         return position % 3
@@ -48,6 +53,10 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
         return 19
     }
 
+    fun setOnClickItemListener(event: OnClickItemListener) {
+        this.event = event
+    }
+
     inner class HeaderViewHolder (itemView: View) : BaseViewHolder(itemView) {
         override fun bindItems(items: String) {
             itemView.day_of_week_text_view.text = "Today"
@@ -60,22 +69,16 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
             itemView.title_workout_text_view.text = "Intervals"
             itemView.title_workout_type_text_view.text = "80% Metabolic"
             itemView.workout_constraint_layout.setOnClickListener({ view ->
-                openWorkoutDetail(view, view.context as Activity)
+                event?.onClickItem(view)
             })
-        }
-
-        private fun openWorkoutDetail(view: View, activity: Activity){
-            val explode = Explode()
-            explode.excludeTarget(android.R.id.statusBarBackground, true)
-            explode.excludeTarget(android.R.id.navigationBarBackground, true)
-            activity.window.exitTransition = explode
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity)
-            val intent = Intent(activity, WorkoutDetailActivity::class.java)
-            ActivityCompat.startActivity(activity, intent, options.toBundle());
         }
     }
 
     open inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         open fun bindItems(items: String) {}
+    }
+
+    interface OnClickItemListener{
+        fun onClickItem(view: View)
     }
 }
