@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.virtualathlete.myfitness.R
 import com.virtualathlete.myfitness.model.Workout
+import com.virtualathlete.myfitness.model.WorkoutType
 import kotlinx.android.synthetic.main.list_item_workout.view.*
 import kotlinx.android.synthetic.main.list_item_workout_header.view.*
-
 
 /**
  * Created by haris on 2018-01-12.
@@ -68,7 +68,16 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
     inner class WorkoutViewHolder(itemView: View) : BaseViewHolder(itemView) {
         override fun bindItems(items: Workout?) {
             itemView.title_workout_text_view.text = items?.name
-            itemView.title_workout_type_text_view.text = items?.type.toString()
+
+            val exerciseTypes = itemView.context.resources.getStringArray(R.array.exercise_types)
+            when (items?.type) {
+                WorkoutType.WEIGHTLIFTING -> itemView.title_workout_type_text_view.text = exerciseTypes[0]
+                WorkoutType.GYMNASTIC -> itemView.title_workout_type_text_view.text = exerciseTypes[1]
+                WorkoutType.METABOLIC -> itemView.title_workout_type_text_view.text = exerciseTypes[2]
+                WorkoutType.REST -> itemView.title_workout_type_text_view.text = exerciseTypes[3]
+                null -> itemView.title_workout_type_text_view.text = "N/A"
+            }
+
             itemView.workout_constraint_layout.setOnClickListener({ view ->
                 event?.onClickItem(view)
             })

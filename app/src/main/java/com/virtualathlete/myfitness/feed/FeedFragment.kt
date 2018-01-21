@@ -1,6 +1,8 @@
 package com.virtualathlete.myfitness.feed
 
 import android.app.ActivityOptions
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -12,35 +14,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.virtualathlete.myfitness.R
 import com.virtualathlete.myfitness.di.ActivityScoped
 import com.virtualathlete.myfitness.model.Workout
 import com.virtualathlete.myfitness.model.WorkoutType
 import com.virtualathlete.myfitness.workout.WorkoutDetailActivity
-import dagger.android.DaggerFragment
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_feed.*
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import android.content.ContentValues.TAG
-import com.google.firebase.database.*
-import android.widget.Toast
-import android.util.Log
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ChildEventListener
-import java.text.SimpleDateFormat
-import kotlin.collections.ArrayList
-
 
 /**
  * Created by haris on 2018-01-11.
  */
 
 @ActivityScoped
-class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.OnClickItemListener {
-
+class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.OnClickItemListener, View.OnClickListener {
     private lateinit var databaseRef: DatabaseReference
     private lateinit var workoutAdapter: WorkoutViewAdapter
+    private lateinit var viewModel: FeedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,57 +44,12 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         workoutAdapter = WorkoutViewAdapter()
         workoutAdapter.setOnClickItemListener(this)
 
-        var workout: Workout = Workout("Upper body", SimpleDateFormat("yyyy-MM-dd").format(Date()), WorkoutType.WEIGHTLIFTING)
-        var workout2: Workout = Workout("Lower body", SimpleDateFormat("yyyy-MM-dd").format(Date()), WorkoutType.WEIGHTLIFTING)
-        var workout3: Workout = Workout("Upper body", SimpleDateFormat("yyyy-MM-dd").format(Date()), WorkoutType.WEIGHTLIFTING)
+        // Get the ViewModel.
+        viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
 
-        /*databaseRef.child("workouts").push().setValue(workout)
-        databaseRef.child("workouts").push().setValue(workout2)
-        databaseRef.child("workouts").push().setValue(workout3)*/
-
-        val childEventListener = object : ChildEventListener {
-            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                var workouts: MutableList<Workout> = ArrayList<Workout>()
-                for (workoutSnapshot: DataSnapshot in dataSnapshot.children){
-                    val workout: Workout? = workoutSnapshot.getValue<Workout>(Workout::class.java)
-                    workout?.let { workouts.add(it) }
-                }
-                workoutAdapter.swapWorkouts(workouts)
-            }
-
-            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                // A comment has changed, use the key to determine if we are displaying this
-                // comment and if so displayed the changed comment.
-                val newComment = dataSnapshot.getValue<Workout>(Workout::class.java)
-                val commentKey = dataSnapshot.key
-
-                // ...
-            }
-
-            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                // A comment has changed, use the key to determine if we are displaying this
-                // comment and if so remove it.
-                val commentKey = dataSnapshot.key
-
-                // ...
-            }
-
-            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                // A comment has changed position, use the key to determine if we are
-                // displaying this comment and if so move it.
-                val movedComment = dataSnapshot.getValue<Workout>(Workout::class.java)
-                val commentKey = dataSnapshot.key
-
-                // ...
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.w(TAG, "postComments:onCancelled", databaseError.toException())
-                Toast.makeText(activity, "Failed to load comments.",
-                        Toast.LENGTH_SHORT).show()
-            }
-        }
-        databaseRef.addChildEventListener(childEventListener)
+        viewModel.getWorkouts().observe(this, Observer { workouts ->
+            workouts?.let { workoutAdapter.swapWorkouts(it) }
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -112,6 +62,14 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         list_workout_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
         list_workout_recycler_view.adapter = workoutAdapter
         list_workout_recycler_view.setHasFixedSize(true)
+        workout_floating_action_button.setOnClickListener(this)
+        sleep_floating_action_button.setOnClickListener(this)
+        swipe_refresh_layout.setOnRefreshListener({
+            viewModel.getWorkouts().observe(this, Observer { workouts ->
+                workouts?.let { workoutAdapter.swapWorkouts(it) }
+                swipe_refresh_layout.isRefreshing = false
+            })
+        })
     }
 
     override fun onClickItem(view: View) {
@@ -123,6 +81,19 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
 
         startActivity(intent,
                 ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            workout_floating_action_button.id -> {
+                val workout = Workout("Run", SimpleDateFormat("yyyy-MM-dd").format(Date()), WorkoutType.METABOLIC)
+                viewModel.addWorkout(workout)
+            }
+            sleep_floating_action_button.id -> {
+                val workout = Workout("Rest", SimpleDateFormat("yyyy-MM-dd").format(Date()), WorkoutType.REST)
+                viewModel.addWorkout(workout)
+            }
+        }
     }
 
     private fun runLayoutAnimation(recyclerView: RecyclerView) {
