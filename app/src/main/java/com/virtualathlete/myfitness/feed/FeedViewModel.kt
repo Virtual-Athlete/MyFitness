@@ -8,16 +8,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.virtualathlete.myfitness.model.Workout
-import java.util.concurrent.Executor
+
 
 /**
  * Created by haris on 2018-01-20.
  */
 
 class FeedViewModel: ViewModel(){
-    var workouts: MutableLiveData<List<Workout>> = MutableLiveData()
+    var workouts: MutableLiveData<HashMap<String, MutableList<Workout>>> = MutableLiveData()
 
-    fun getWorkouts() : LiveData<List<Workout>> {
+    fun getWorkouts() : LiveData<HashMap<String, MutableList<Workout>>> {
         if (workouts.value == null) {
             FirebaseDatabase.getInstance()
                     .getReference("workouts")
@@ -28,7 +28,7 @@ class FeedViewModel: ViewModel(){
                                 dataSnapshot.children
                                         .map { it.getValue<Workout>(Workout::class.java) }
                                         .forEach { workout -> workout?.let { mutableWorkouts.add(it) } }
-                                workouts.postValue(mutableWorkouts)
+                                workouts.postValue(sortWorkoutsByDate(mutableWorkouts))
                             }
                         }
                         override fun onCancelled(p0: DatabaseError?) {
@@ -44,5 +44,24 @@ class FeedViewModel: ViewModel(){
                 .getReference("workouts")
                 .push()
                 .setValue(workout)
+    }
+
+    private fun sortWorkoutsByDate(workouts: ArrayList<Workout>) : HashMap<String, MutableList<Workout>>{
+
+        workouts.sortedBy { workout -> workout.date }
+
+        val sortedWorkouts: HashMap<String, MutableList<Workout>> = HashMap()
+        workouts.forEach{ workout -> run {
+                var workoutsByDate: MutableList<Workout>? = sortedWorkouts[workout.date.format()]
+                if (workoutsByDate == null) {
+                    workoutsByDate = ArrayList<Workout>()
+                    val newDateKey: String = workout.date
+                    sortedWorkouts[newDateKey] = workoutsByDate
+                }
+            workoutsByDate.add(workout)
+            }
+        }
+
+        return sortedWorkouts
     }
 }

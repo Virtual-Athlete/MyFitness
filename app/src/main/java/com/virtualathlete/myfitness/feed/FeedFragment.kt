@@ -48,7 +48,8 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
 
         viewModel.getWorkouts().observe(this, Observer { workouts ->
-            workouts?.let { workoutAdapter.swapWorkouts(it) }
+            //workouts?.let { workoutAdapter.swapWorkouts(it) }
+            runLayoutAnimation(list_workout_recycler_view)
         })
     }
 
@@ -66,7 +67,7 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         sleep_floating_action_button.setOnClickListener(this)
         swipe_refresh_layout.setOnRefreshListener({
             viewModel.getWorkouts().observe(this, Observer { workouts ->
-                workouts?.let { workoutAdapter.swapWorkouts(it) }
+                //workouts?.let { workoutAdapter.swapWorkouts(it) }
                 swipe_refresh_layout.isRefreshing = false
             })
         })
