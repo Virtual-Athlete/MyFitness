@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.virtualathlete.myfitness.R
+import com.virtualathlete.myfitness.model.BaseWorkout
 import com.virtualathlete.myfitness.model.Workout
+import com.virtualathlete.myfitness.model.WorkoutSection
 import com.virtualathlete.myfitness.model.WorkoutType
 import kotlinx.android.synthetic.main.list_item_workout.view.*
 import kotlinx.android.synthetic.main.list_item_workout_header.view.*
@@ -15,14 +17,17 @@ import kotlinx.android.synthetic.main.list_item_workout_header.view.*
  */
 class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolder>() {
 
-    private var workouts: List<Workout>? = null
+    private var baseWorkouts: List<BaseWorkout>? = null
 
     private val headerView = 0
     private val workoutView = 1
     private var event: OnClickItemListener? = null
 
     override fun getItemViewType(position: Int): Int {
-        return position % 3
+        if(baseWorkouts?.get(position) is WorkoutSection)
+            return 0;
+        else
+            return 1;
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder {
@@ -38,12 +43,12 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        holder.bindItems(workouts?.get(position))
+        holder.bindItems(baseWorkouts?.get(position))
     }
 
     override fun getItemCount(): Int {
-        return if(workouts != null){
-            workouts!!.size
+        return if(baseWorkouts != null){
+            baseWorkouts!!.size
         } else {
             0
         }
@@ -53,29 +58,30 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
         this.event = event
     }
 
-    fun swapWorkouts(workouts: List<Workout>){
-        this.workouts = workouts
+    fun swapWorkouts(baseWorkouts: List<BaseWorkout>){
+        this.baseWorkouts = baseWorkouts
         notifyDataSetChanged()
     }
 
     inner class HeaderViewHolder (itemView: View) : BaseViewHolder(itemView) {
-        override fun bindItems(items: Workout?) {
+        override fun bindItems(baseWorkout: BaseWorkout?) {
+            val workoutSection = baseWorkout as WorkoutSection
             itemView.day_of_week_text_view.text = "Today"
-            itemView.day_of_month_text_view.text = items?.date
+            itemView.day_of_month_text_view.text = workoutSection.date
         }
     }
 
     inner class WorkoutViewHolder(itemView: View) : BaseViewHolder(itemView) {
-        override fun bindItems(items: Workout?) {
-            itemView.title_workout_text_view.text = items?.name
+        override fun bindItems(baseWorkout: BaseWorkout?) {
+            val workout = baseWorkout as Workout
+            itemView.title_workout_text_view.text = workout.name
 
             val exerciseTypes = itemView.context.resources.getStringArray(R.array.exercise_types)
-            when (items?.type) {
+            when (workout.type) {
                 WorkoutType.WEIGHTLIFTING -> itemView.title_workout_type_text_view.text = exerciseTypes[0]
                 WorkoutType.GYMNASTIC -> itemView.title_workout_type_text_view.text = exerciseTypes[1]
                 WorkoutType.METABOLIC -> itemView.title_workout_type_text_view.text = exerciseTypes[2]
                 WorkoutType.REST -> itemView.title_workout_type_text_view.text = exerciseTypes[3]
-                null -> itemView.title_workout_type_text_view.text = "N/A"
             }
 
             itemView.workout_constraint_layout.setOnClickListener({ view ->
@@ -85,7 +91,7 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
     }
 
     open inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        open fun bindItems(items: Workout?) {}
+        open fun bindItems(baseWorkout: BaseWorkout?) {}
     }
 
     interface OnClickItemListener{

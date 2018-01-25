@@ -7,7 +7,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.virtualathlete.myfitness.model.BaseWorkout
 import com.virtualathlete.myfitness.model.Workout
+import com.virtualathlete.myfitness.model.WorkoutSection
+import java.util.function.Consumer
 
 
 /**
@@ -15,9 +18,9 @@ import com.virtualathlete.myfitness.model.Workout
  */
 
 class FeedViewModel: ViewModel(){
-    var workouts: MutableLiveData<HashMap<String, MutableList<Workout>>> = MutableLiveData()
+    var workouts: MutableLiveData<MutableList<BaseWorkout>> = MutableLiveData()
 
-    fun getWorkouts() : LiveData<HashMap<String, MutableList<Workout>>> {
+    fun getWorkouts() : LiveData<MutableList<BaseWorkout>> {
         if (workouts.value == null) {
             FirebaseDatabase.getInstance()
                     .getReference("workouts")
@@ -46,7 +49,7 @@ class FeedViewModel: ViewModel(){
                 .setValue(workout)
     }
 
-    private fun sortWorkoutsByDate(workouts: ArrayList<Workout>) : HashMap<String, MutableList<Workout>>{
+    private fun sortWorkoutsByDate(workouts: ArrayList<Workout>) : MutableList<BaseWorkout>{
 
         workouts.sortedBy { workout -> workout.date }
 
@@ -62,6 +65,17 @@ class FeedViewModel: ViewModel(){
             }
         }
 
-        return sortedWorkouts
+
+        val sortedBaseWorkouts: MutableList<BaseWorkout> = ArrayList()
+        sortedWorkouts.forEach{ workouts ->
+            run {
+                sortedBaseWorkouts.add(WorkoutSection(workouts.key))
+                workouts.value.forEach{
+                    sortedBaseWorkouts.add(Workout(it.name, it.date, it.type))
+                }
+            }
+        }
+
+        return sortedBaseWorkouts
     }
 }

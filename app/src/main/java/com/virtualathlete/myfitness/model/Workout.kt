@@ -7,7 +7,7 @@ import java.util.*
  * Created by haris on 2018-01-19.
  */
 @IgnoreExtraProperties
-class Workout constructor(){
+class Workout constructor() : BaseWorkout() {
 
     constructor(name: String, date: String, workoutType: WorkoutType) : this() {
         this.name = name
