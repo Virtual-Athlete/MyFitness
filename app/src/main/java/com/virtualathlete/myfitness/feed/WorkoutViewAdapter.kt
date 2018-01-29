@@ -1,6 +1,7 @@
 package com.virtualathlete.myfitness.feed
 
 import android.support.v7.widget.RecyclerView
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,9 @@ import com.virtualathlete.myfitness.model.WorkoutSection
 import com.virtualathlete.myfitness.model.WorkoutType
 import kotlinx.android.synthetic.main.list_item_workout.view.*
 import kotlinx.android.synthetic.main.list_item_workout_header.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by haris on 2018-01-12.
@@ -66,7 +70,18 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
     inner class HeaderViewHolder (itemView: View) : BaseViewHolder(itemView) {
         override fun bindItems(baseWorkout: BaseWorkout?) {
             val workoutSection = baseWorkout as WorkoutSection
-            itemView.day_of_week_text_view.text = "Today"
+            val format = SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN);
+            val date = format.parse(workoutSection.date);
+            if(DateUtils.isToday(date.time)){
+                itemView.day_of_week_text_view.text = "Today"
+            } else if(DateUtils.isToday(date.getTime() - DateUtils.DAY_IN_MILLIS)){
+                itemView.day_of_week_text_view.text = "Tomorrow"
+            } else if(DateUtils.isToday(date.getTime() + DateUtils.DAY_IN_MILLIS)){
+                itemView.day_of_week_text_view.text = "Yesterday"
+            } else {
+               itemView.day_of_week_text_view.text = ""
+            }
+
             itemView.day_of_month_text_view.text = workoutSection.date
         }
     }

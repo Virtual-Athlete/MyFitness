@@ -10,7 +10,6 @@ import com.google.firebase.database.ValueEventListener
 import com.virtualathlete.myfitness.model.BaseWorkout
 import com.virtualathlete.myfitness.model.Workout
 import com.virtualathlete.myfitness.model.WorkoutSection
-import java.util.function.Consumer
 
 
 /**
