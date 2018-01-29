@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import com.virtualathlete.myfitness.model.BaseWorkout
 import com.virtualathlete.myfitness.model.Workout
 import com.virtualathlete.myfitness.model.WorkoutSection
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -52,13 +53,14 @@ class FeedViewModel: ViewModel(){
     private fun sortWorkoutsByDate(workouts: ArrayList<Workout>) : MutableList<BaseWorkout>{
 
         workouts.sortedBy { workout -> workout.date }
+        //workouts.filter { workout -> (Date(workout.date) }
 
         val sortedWorkouts: TreeMap<String, MutableList<Workout>> = TreeMap()
         workouts.forEach{ workout -> run {
-                var workoutsByDate: MutableList<Workout>? = sortedWorkouts[workout.date.format()]
+                var workoutsByDate: MutableList<Workout>? = sortedWorkouts[Date(workout.date!!).toString()]
                 if (workoutsByDate == null) {
                     workoutsByDate = ArrayList<Workout>()
-                    val newDateKey: String = workout.date
+                    val newDateKey: String = Date(workout.date!!).toString()
                     sortedWorkouts[newDateKey] = workoutsByDate
                 }
             workoutsByDate.add(workout)
@@ -71,7 +73,7 @@ class FeedViewModel: ViewModel(){
             run {
                 sortedBaseWorkouts.add(WorkoutSection(workouts.key))
                 workouts.value.forEach{
-                    sortedBaseWorkouts.add(Workout(it.name, it.date, it.type))
+                    sortedBaseWorkouts.add(Workout(it.name!!, Date(it.date!!).time, it.type!!))
                 }
             }
         }

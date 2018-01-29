@@ -86,11 +86,11 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
     override fun onClick(view: View?) {
         when(view?.id){
             workout_floating_action_button.id -> {
-                val workout = Workout("Run", SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN).format(Date()), WorkoutType.METABOLIC)
+                val workout = Workout("Run", Date().time, WorkoutType.METABOLIC)
                 viewModel.addWorkout(workout)
             }
             sleep_floating_action_button.id -> {
-                val workout = Workout("Rest", SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN).format(Date()), WorkoutType.REST)
+                val workout = Workout("Rest", Date().time, WorkoutType.REST)
                 viewModel.addWorkout(workout)
             }
         }

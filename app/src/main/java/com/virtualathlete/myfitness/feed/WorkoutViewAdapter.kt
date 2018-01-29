@@ -25,13 +25,16 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
 
     private val headerView = 0
     private val workoutView = 1
+    private val restView = 2
     private var event: OnClickItemListener? = null
 
     override fun getItemViewType(position: Int): Int {
-        if(baseWorkouts?.get(position) is WorkoutSection)
-            return 0;
+        return if (baseWorkouts?.get(position) is WorkoutSection)
+            headerView;
+        else if(baseWorkouts?.get(position) is Workout && (baseWorkouts?.get(position) as Workout).type == WorkoutType.REST)
+            restView
         else
-            return 1;
+            workoutView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder {
@@ -41,6 +44,9 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
             }
             headerView -> {
                 HeaderViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_workout_header, parent, false))
+            }
+            restView -> {
+                RestViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_rest, parent, false))
             }
             else -> WorkoutViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_workout, parent, false))
         }
@@ -74,15 +80,18 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
             val date = format.parse(workoutSection.date);
             if(DateUtils.isToday(date.time)){
                 itemView.day_of_week_text_view.text = "Today"
-            } else if(DateUtils.isToday(date.getTime() - DateUtils.DAY_IN_MILLIS)){
+                itemView.day_of_month_text_view.visibility = View.GONE
+            } else if(DateUtils.isToday(date.time - DateUtils.DAY_IN_MILLIS)){
                 itemView.day_of_week_text_view.text = "Tomorrow"
-            } else if(DateUtils.isToday(date.getTime() + DateUtils.DAY_IN_MILLIS)){
+                itemView.day_of_month_text_view.visibility = View.GONE
+            } else if(DateUtils.isToday(date.time + DateUtils.DAY_IN_MILLIS)){
                 itemView.day_of_week_text_view.text = "Yesterday"
+                itemView.day_of_month_text_view.visibility = View.GONE
             } else {
-               itemView.day_of_week_text_view.text = ""
+                itemView.day_of_week_text_view.text = ""
+                itemView.day_of_month_text_view.text = workoutSection.date
+                itemView.day_of_month_text_view.visibility = View.VISIBLE
             }
-
-            itemView.day_of_month_text_view.text = workoutSection.date
         }
     }
 
@@ -102,6 +111,12 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
             itemView.workout_constraint_layout.setOnClickListener({ view ->
                 event?.onClickItem(view)
             })
+        }
+    }
+
+    inner class RestViewHolder(itemView: View) : BaseViewHolder(itemView) {
+        override fun bindItems(baseWorkout: BaseWorkout?) {
+
         }
     }
 
