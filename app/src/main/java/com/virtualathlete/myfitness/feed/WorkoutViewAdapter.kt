@@ -77,19 +77,19 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
         override fun bindItems(baseWorkout: BaseWorkout?) {
             val workoutSection = baseWorkout as WorkoutSection
             val format = SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN);
-            val date = format.parse(workoutSection.date);
+            val date = Date(workoutSection.date!!);
             if(DateUtils.isToday(date.time)){
                 itemView.day_of_week_text_view.text = "Today"
                 itemView.day_of_month_text_view.visibility = View.GONE
             } else if(DateUtils.isToday(date.time - DateUtils.DAY_IN_MILLIS)){
                 itemView.day_of_week_text_view.text = "Tomorrow"
-                itemView.day_of_month_text_view.visibility = View.GONE
-            } else if(DateUtils.isToday(date.time + DateUtils.DAY_IN_MILLIS)){
-                itemView.day_of_week_text_view.text = "Yesterday"
-                itemView.day_of_month_text_view.visibility = View.GONE
+                itemView.day_of_month_text_view.text = format.format(workoutSection.date)
             } else {
-                itemView.day_of_week_text_view.text = ""
-                itemView.day_of_month_text_view.text = workoutSection.date
+                val sdf = SimpleDateFormat("EEEE")
+                val dayOfTheWeek = sdf.format(date)
+
+                itemView.day_of_week_text_view.text = dayOfTheWeek
+                itemView.day_of_month_text_view.text = format.format(workoutSection.date)
                 itemView.day_of_month_text_view.visibility = View.VISIBLE
             }
         }
@@ -103,8 +103,8 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
             val exerciseTypes = itemView.context.resources.getStringArray(R.array.exercise_types)
             when (workout.type) {
                 WorkoutType.WEIGHTLIFTING -> itemView.title_workout_type_text_view.text = exerciseTypes[0]
-                WorkoutType.GYMNASTIC -> itemView.title_workout_type_text_view.text = exerciseTypes[1]
-                WorkoutType.METABOLIC -> itemView.title_workout_type_text_view.text = exerciseTypes[2]
+                WorkoutType.METABOLIC -> itemView.title_workout_type_text_view.text = exerciseTypes[1]
+                WorkoutType.GYMNASTIC -> itemView.title_workout_type_text_view.text = exerciseTypes[2]
                 WorkoutType.REST -> itemView.title_workout_type_text_view.text = exerciseTypes[3]
             }
 

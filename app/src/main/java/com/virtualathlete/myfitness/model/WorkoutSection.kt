@@ -5,9 +5,9 @@ package com.virtualathlete.myfitness.model
  */
 
 class WorkoutSection constructor() : BaseWorkout(){
-    constructor(date: String) : this() {
+    constructor(date: Long) : this() {
         this.date = date
     }
 
-    lateinit var date: String
+    var date: Long? = null
 }

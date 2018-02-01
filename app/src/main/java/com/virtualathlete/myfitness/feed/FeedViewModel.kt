@@ -3,6 +3,7 @@ package com.virtualathlete.myfitness.feed
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.icu.util.UniversalTimeScale.toLong
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -57,10 +58,10 @@ class FeedViewModel: ViewModel(){
 
         val sortedWorkouts: TreeMap<String, MutableList<Workout>> = TreeMap()
         workouts.forEach{ workout -> run {
-                var workoutsByDate: MutableList<Workout>? = sortedWorkouts[Date(workout.date!!).toString()]
+                var workoutsByDate: MutableList<Workout>? = sortedWorkouts[Date(workout.date!!).time.toString()]
                 if (workoutsByDate == null) {
                     workoutsByDate = ArrayList<Workout>()
-                    val newDateKey: String = Date(workout.date!!).toString()
+                    val newDateKey: String = Date(workout.date!!).time.toString()
                     sortedWorkouts[newDateKey] = workoutsByDate
                 }
             workoutsByDate.add(workout)
@@ -71,7 +72,7 @@ class FeedViewModel: ViewModel(){
         val sortedBaseWorkouts: MutableList<BaseWorkout> = ArrayList()
         sortedWorkouts.forEach{ workouts ->
             run {
-                sortedBaseWorkouts.add(WorkoutSection(workouts.key))
+                sortedBaseWorkouts.add(WorkoutSection(workouts.key.toLong()))
                 workouts.value.forEach{
                     sortedBaseWorkouts.add(Workout(it.name!!, Date(it.date!!).time, it.type!!))
                 }
