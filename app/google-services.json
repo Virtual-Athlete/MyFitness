@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "107306219773",
+    "firebase_url": "https://myfitness-817c0.firebaseio.com",
+    "project_id": "myfitness-817c0",
+    "storage_bucket": "myfitness-817c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107306219773:android:5502279605edcc8a",
+        "android_client_info": {
+          "package_name": "com.virtualathlete.myfitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107306219773-it8l5o3qhdt6ud4ecpv2ig1sen1opno8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvzCpt-aC3AWXbw5a84IkPF34PZygwD78"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
