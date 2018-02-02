@@ -41,15 +41,10 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         super.onCreate(savedInstanceState)
         databaseRef = FirebaseDatabase.getInstance().reference
 
-        workoutAdapter = WorkoutViewAdapter()
-        workoutAdapter.setOnClickItemListener(this)
-
         // Get the ViewModel.
         viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
-
-        viewModel.getWorkouts().observe(activity, Observer { workouts ->
-            workouts?.let { workoutAdapter.swapWorkouts(it) }
-        })
+        workoutAdapter = WorkoutViewAdapter()
+        workoutAdapter.setOnClickItemListener(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,7 +55,6 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         super.onViewCreated(view, savedInstanceState)
 
         list_workout_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-        list_workout_recycler_view.adapter = workoutAdapter
         list_workout_recycler_view.setHasFixedSize(true)
         workout_floating_action_button.setOnClickListener(this)
         sleep_floating_action_button.setOnClickListener(this)
@@ -69,6 +63,16 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
                 workouts?.let { workoutAdapter.swapWorkouts(it) }
                 swipe_refresh_layout.isRefreshing = false
             })
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getWorkouts().observe(activity, Observer { workouts ->
+            workouts?.let {
+                workoutAdapter.swapWorkouts(it)
+                list_workout_recycler_view.adapter = workoutAdapter
+            }
         })
     }
 
