@@ -3,4 +3,11 @@
     <string name="title_home">Feed</string>
     <string name="title_dashboard">Exercises</string>
     <string name="title_notifications">Settings</string>
+
+    <string-array name="exercise_types">
+        <item>Weightlifting</item>
+        <item>Metabolic</item>
+        <item>Gymnastic</item>
+        <item>Rest</item>
+    </string-array>
 </resources>
