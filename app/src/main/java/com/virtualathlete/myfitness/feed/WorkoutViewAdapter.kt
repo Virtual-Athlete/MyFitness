@@ -69,7 +69,7 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
         notifyDataSetChanged()
     }
 
-    inner class HeaderViewHolder (itemView: View) : BaseViewHolder(itemView) {
+    inner class HeaderViewHolder (view: View) : BaseViewHolder(view) {
         override fun bindItems(baseWorkout: BaseWorkout?) {
             val workoutSection = baseWorkout as WorkoutSection
             val format = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -94,13 +94,13 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
         }
     }
 
-    inner class RestViewHolder(itemView: View) : BaseViewHolder(itemView) {
+    inner class RestViewHolder(view: View) : BaseViewHolder(view) {
         override fun bindItems(baseWorkout: BaseWorkout?) {
             // Bind vector drawable
         }
     }
 
-    inner class WorkoutViewHolder(itemView: View) : BaseViewHolder(itemView) {
+    inner class WorkoutViewHolder(view: View) : BaseViewHolder(view) {
         override fun bindItems(baseWorkout: BaseWorkout?) {
             val workout = baseWorkout as Workout
             itemView.title_workout_text_view.text = workout.name
@@ -112,16 +112,16 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
                 WorkoutType.REST -> itemView.title_workout_type_text_view.text = exerciseTypes[3]
             }
             itemView.workout_constraint_layout.setOnClickListener({ view ->
-                event?.onClickItem(view)
+                event?.onClickItem(view, workout.key)
             })
         }
     }
 
-    open inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    open inner class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view){
         open fun bindItems(baseWorkout: BaseWorkout?) {}
     }
 
     interface OnClickItemListener{
-        fun onClickItem(view: View)
+        fun onClickItem(view: View, id: String?)
     }
 }

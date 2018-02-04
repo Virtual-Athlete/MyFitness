@@ -33,13 +33,11 @@ import javax.inject.Inject
 
 @ActivityScoped
 class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.OnClickItemListener, View.OnClickListener {
-    private lateinit var databaseRef: DatabaseReference
     private lateinit var workoutAdapter: WorkoutViewAdapter
     private lateinit var viewModel: FeedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        databaseRef = FirebaseDatabase.getInstance().reference
 
         // Get the ViewModel.
         viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
@@ -76,12 +74,13 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         })
     }
 
-    override fun onClickItem(view: View) {
+    override fun onClickItem(view: View, id: String?) {
         val fade: Transition = Fade()
         fade.excludeTarget(android.R.id.statusBarBackground, true)
         fade.excludeTarget(android.R.id.navigationBarBackground, true)
         activity.window.exitTransition = fade
         val intent = Intent(activity, WorkoutDetailActivity::class.java)
+        intent.putExtra("workout_id", id)
 
         startActivity(intent,
                 ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());

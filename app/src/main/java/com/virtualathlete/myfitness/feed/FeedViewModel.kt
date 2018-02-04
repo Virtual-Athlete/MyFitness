@@ -31,7 +31,11 @@ class FeedViewModel: ViewModel(){
                             if (dataSnapshot.exists()) {
                                 val mutableWorkouts = ArrayList<Workout>()
                                 dataSnapshot.children
-                                        .map { it.getValue<Workout>(Workout::class.java) }
+                                        .map {
+                                            var hej = it.getValue<Workout>(Workout::class.java)
+                                            hej?.key = it.key
+                                            hej
+                                        }
                                         .forEach { workout -> workout?.let { mutableWorkouts.add(it) } }
                                 workouts.postValue(sortWorkoutsByDate(mutableWorkouts))
                             }
@@ -52,9 +56,7 @@ class FeedViewModel: ViewModel(){
     }
 
     private fun sortWorkoutsByDate(workouts: ArrayList<Workout>) : MutableList<BaseWorkout>{
-
         workouts.sortedBy { workout -> workout.date }
-        //workouts.filter { workout -> (Date(workout.date) }
 
         val sortedWorkouts: TreeMap<String, MutableList<Workout>> = TreeMap()
         workouts.forEach{ workout -> run {
@@ -68,13 +70,12 @@ class FeedViewModel: ViewModel(){
             }
         }
 
-
         val sortedBaseWorkouts: MutableList<BaseWorkout> = ArrayList()
         sortedWorkouts.forEach{ workouts ->
             run {
                 sortedBaseWorkouts.add(WorkoutSection(workouts.key.toLong()))
                 workouts.value.forEach{
-                    sortedBaseWorkouts.add(Workout(it.name!!, Date(it.date!!).time, it.type!!))
+                    sortedBaseWorkouts.add(Workout(it.key!!, it.name!!, Date(it.date!!).time, it.type!!))
                 }
             }
         }
