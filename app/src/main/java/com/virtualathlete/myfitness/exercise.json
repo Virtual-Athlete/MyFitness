@@ -1,0 +1,302 @@
+[
+  {
+    "id":"exercises/pull-ups",
+    "name":"Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/pullovers",
+    "name":"Pullovers",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/pulling-stance-back-squat",
+    "name":"Pulling Stance Back Squat",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/jumping-pull-ups",
+    "name":"Jumping Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":0.5
+  },
+  {
+    "id":"exercises/kipping-pull-ups",
+    "name":"Kipping Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/butterfly-pull-ups",
+    "name":"Butterfly Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/strict-pull-ups",
+    "name":"Strict Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.5
+  },
+  {
+    "id":"exercises/l-pull-ups",
+    "name":"L Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/sumo-deadlift-high-pulls",
+    "name":"Sumo-Deadlift High-Pulls",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/chest-to-bar-pull-ups",
+    "name":"Chest To Bar Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/burpee-pull-ups",
+    "name":"Burpee Pull-Ups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/bands-pull-apart",
+    "name":"Bands Pull Apart",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/block-snatch-high-pull",
+    "name":"Block Snatch High Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/everett-snatch-pull",
+    "name":"Everett Snatch Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/floating-snatch-pull",
+    "name":"Floating Snatch Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/floating-snatch-pull-on-riser",
+    "name":"Floating Snatch Pull On Riser",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/hang-snatch-pull",
+    "name":"Hang Snatch Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/slow-pull-snatch",
+    "name":"Slow Pull Snatch",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-bench-pull-staircase-pull",
+    "name":"Snatch Bench Pull (Staircase Pull)",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-high-pull",
+    "name":"Snatch High Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-high-pull-on-riser",
+    "name":"Snatch High Pull On Riser",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-long-pull",
+    "name":"Snatch Long Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-pull",
+    "name":"Snatch Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-pull-on-riser",
+    "name":"Snatch Pull On Riser",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-pull-down-chinese-snatch-pull",
+    "name":"Snatch Pull Down (Chinese Snatch Pull)",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/snatch-segmented-pull",
+    "name":"Snatch Segmented Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/block-clean-high-pull",
+    "name":"Block Clean High Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/everett-clean-pull",
+    "name":"Everett Clean Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/floating-clean-pull",
+    "name":"Floating Clean Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/floating-clean-pull-on-riser",
+    "name":"Floating Clean Pull On Riser",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/hang-clean-pull",
+    "name":"Hang Clean Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/slow-pull-clean",
+    "name":"Slow Pull Clean",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-bench-pull-staircase-pull",
+    "name":"Clean Bench Pull (Staircase Pull)",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-high-pull",
+    "name":"Clean High Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-high-pull-on-riser",
+    "name":"Clean High Pull On Riser",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-long-pull",
+    "name":"Clean Long Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-pull",
+    "name":"Clean Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-pull-on-riser",
+    "name":"Clean Pull On Riser",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-pull-down-chinese-snatch-pull",
+    "name":"Clean Pull Down (Chinese Snatch Pull)",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/clean-segmented-pull",
+    "name":"Clean Segmented Pull",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/lean-away-pullups",
+    "name":"Lean away pullups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/towel-pullups",
+    "name":"Towel pullups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/l-seated-towel-pullups",
+    "name":"L-seated towel pullups",
+    "typeName":"GymnasticExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/sled-pull",
+    "name":"Sled pull",
+    "typeName":"MetabolicExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/weighted-pull-up-pronated-grip",
+    "name":"Weighted pull-up pronated grip",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/weighted-pull-up-supinated-grip",
+    "name":"Weighted pull-up supinated grip",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/weighted-strict-pull-up-pronated-grip",
+    "name":"Weighted strict pull-up pronated grip",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/weighted-strict-pull-up-supinated-grip",
+    "name":"Weighted strict pull-up supinated grip",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/weighted-chest-to-bar-pullup-pronated-grip",
+    "name":"Weighted chest to bar pullup pronated grip",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  },
+  {
+    "id":"exercises/weighted-chest-to-bar-pullup-supinated-grip",
+    "name":"Weighted chest to bar pullup supinated grip",
+    "typeName":"WeightExercise",
+    "xpFactor":1.0
+  }
+]

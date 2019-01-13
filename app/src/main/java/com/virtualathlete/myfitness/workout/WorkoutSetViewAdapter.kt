@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.list_item_workout_set.view.*
  */
 class WorkoutSetViewAdapter : RecyclerView.Adapter<WorkoutSetViewAdapter.ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.list_item_workout_set, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item_workout_set, parent, false)
         return ViewHolder(v)
     }
 

@@ -47,28 +47,29 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         workoutAdapter.setOnClickItemListener(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_feed, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         list_workout_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
         list_workout_recycler_view.setHasFixedSize(true)
         workout_floating_action_button.setOnClickListener(this)
         sleep_floating_action_button.setOnClickListener(this)
-        swipe_refresh_layout.setOnRefreshListener({
-            viewModel.getWorkouts().observe(activity, Observer { workouts ->
+        swipe_refresh_layout.setOnRefreshListener {
+            viewModel.getWorkouts().observe(this, Observer { workouts ->
                 workouts?.let { workoutAdapter.swapWorkouts(it) }
                 swipe_refresh_layout.isRefreshing = false
             })
-        })
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getWorkouts().observe(activity, Observer { workouts ->
+        viewModel.getWorkouts().observe(this, Observer { workouts ->
             workouts?.let {
                 workoutAdapter.swapWorkouts(it)
                 list_workout_recycler_view.adapter = workoutAdapter
@@ -80,7 +81,7 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         val fade: Transition = Fade()
         fade.excludeTarget(android.R.id.statusBarBackground, true)
         fade.excludeTarget(android.R.id.navigationBarBackground, true)
-        activity.window.exitTransition = fade
+        activity!!.window.exitTransition = fade
         val intent = Intent(activity, WorkoutDetailActivity::class.java)
 
         startActivity(intent,
@@ -105,7 +106,7 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         val controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
 
         recyclerView.layoutAnimation = controller
-        recyclerView.adapter.notifyDataSetChanged()
+        recyclerView.adapter!!.notifyDataSetChanged()
         recyclerView.scheduleLayoutAnimation()
     }
 }

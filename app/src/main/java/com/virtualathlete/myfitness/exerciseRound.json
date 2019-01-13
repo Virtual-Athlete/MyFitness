@@ -1,0 +1,26 @@
+{
+  "typeName":"G",
+  "exerciseReference":{
+    "id":"exercises/pull-ups",
+    "name":"Pull-Ups",
+    "xpFactor":1.0
+  },
+  "repsType":"Fix",
+  "repsMale":null,
+  "repsFemale":null,
+  "repsMaleString":null,
+  "repsFemaleString":null,
+  "timed":null,
+  "pace":null,
+  "exerciseDescription":null,
+  "weightType":"NoWeight",
+  "percentage":null,
+  "weightMale":null,
+  "weightFemale":null,
+  "percentageString":null,
+  "weightMaleString":null,
+  "weightFemaleString":null,
+  "weightMaleAsGrams":0.0,
+  "weightFemaleAsGrams":0.0,
+  "weightUnit":"Kilogram"
+}

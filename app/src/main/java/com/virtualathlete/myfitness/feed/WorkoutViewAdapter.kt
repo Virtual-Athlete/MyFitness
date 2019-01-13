@@ -39,7 +39,7 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
             WORKOUT_VIEW
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             HEADER_VIEW -> {
                 HeaderViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_workout_header, parent, false))
@@ -111,9 +111,9 @@ class WorkoutViewAdapter : RecyclerView.Adapter<WorkoutViewAdapter.BaseViewHolde
                 WorkoutType.GYMNASTIC -> itemView.title_workout_type_text_view.text = exerciseTypes[2]
                 WorkoutType.REST -> itemView.title_workout_type_text_view.text = exerciseTypes[3]
             }
-            itemView.workout_constraint_layout.setOnClickListener({ view ->
+            itemView.workout_constraint_layout.setOnClickListener { view ->
                 event?.onClickItem(view)
-            })
+            }
         }
     }
 

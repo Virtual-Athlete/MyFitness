@@ -27,6 +27,10 @@ class FeedViewModel: ViewModel(){
             FirebaseDatabase.getInstance()
                     .getReference("workouts")
                     .addValueEventListener(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
+                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        }
+
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 val mutableWorkouts = ArrayList<Workout>()
@@ -36,9 +40,7 @@ class FeedViewModel: ViewModel(){
                                 workouts.postValue(sortWorkoutsByDate(mutableWorkouts))
                             }
                         }
-                        override fun onCancelled(p0: DatabaseError?) {
-                            // Crash, lets notify fail somehow!
-                        }
+
                     })
         }
         return workouts
