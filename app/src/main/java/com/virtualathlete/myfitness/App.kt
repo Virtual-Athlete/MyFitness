@@ -1,18 +1,21 @@
 package com.virtualathlete.myfitness
 
-import android.app.Application
-import com.virtualathlete.myfitness.di.AppComponent
+import com.google.firebase.database.FirebaseDatabase
 import com.virtualathlete.myfitness.di.DaggerAppComponent
-import dagger.android.DaggerApplication
 import dagger.android.AndroidInjector
-
+import dagger.android.DaggerApplication
 
 
 /**
  * Created by haris on 2018-01-11.
  */
 class App : DaggerApplication() {
+    override fun onCreate() {
+        super.onCreate()
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+    }
+
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-       return DaggerAppComponent.builder().application(this).build();
+       return DaggerAppComponent.builder().application(this).build()
     }
 }

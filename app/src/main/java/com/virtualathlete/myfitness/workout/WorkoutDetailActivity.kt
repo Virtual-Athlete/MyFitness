@@ -31,9 +31,9 @@ class WorkoutDetailActivity : DaggerAppCompatActivity() {
         if(resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
             app_bar_layout.setExpanded(false, true)
         }
-        floating_action_button.setOnClickListener({ view ->
+        floating_action_button.setOnClickListener { view ->
             onFabClicked(view)
-        })
+        }
     }
 
     override fun onResume() {

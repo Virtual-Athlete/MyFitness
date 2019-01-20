@@ -3,15 +3,11 @@ package com.virtualathlete.myfitness.feed
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.icu.util.UniversalTimeScale.toLong
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import android.util.Log
+import com.google.firebase.database.*
 import com.virtualathlete.myfitness.model.BaseWorkout
 import com.virtualathlete.myfitness.model.Workout
 import com.virtualathlete.myfitness.model.WorkoutSection
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -22,15 +18,12 @@ import java.util.*
 class FeedViewModel: ViewModel(){
     var workouts: MutableLiveData<MutableList<BaseWorkout>> = MutableLiveData()
 
+    private var workoutRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("workouts")
+
     fun getWorkouts() : LiveData<MutableList<BaseWorkout>> {
         if (workouts.value == null) {
-            FirebaseDatabase.getInstance()
-                    .getReference("workouts")
+            workoutRef
                     .addValueEventListener(object : ValueEventListener {
-                        override fun onCancelled(p0: DatabaseError) {
-                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                        }
-
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 val mutableWorkouts = ArrayList<Workout>()
@@ -41,14 +34,16 @@ class FeedViewModel: ViewModel(){
                             }
                         }
 
+                        override fun onCancelled(p0: DatabaseError) {
+                            Log.w(javaClass.name, "Listener was cancelled at workouts")
+                        }
                     })
         }
         return workouts
     }
 
     fun addWorkout(workout: Workout){
-        FirebaseDatabase.getInstance()
-                .getReference("workouts")
+        workoutRef
                 .push()
                 .setValue(workout)
     }
@@ -56,7 +51,6 @@ class FeedViewModel: ViewModel(){
     private fun sortWorkoutsByDate(workouts: ArrayList<Workout>) : MutableList<BaseWorkout>{
 
         workouts.sortedBy { workout -> workout.date }
-        //workouts.filter { workout -> (Date(workout.date) }
 
         val sortedWorkouts: TreeMap<String, MutableList<Workout>> = TreeMap()
         workouts.forEach{ workout -> run {
@@ -69,7 +63,6 @@ class FeedViewModel: ViewModel(){
             workoutsByDate.add(workout)
             }
         }
-
 
         val sortedBaseWorkouts: MutableList<BaseWorkout> = ArrayList()
         sortedWorkouts.forEach{ workouts ->
