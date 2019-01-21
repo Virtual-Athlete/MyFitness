@@ -5,17 +5,14 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.transition.Fade
 import android.transition.Transition
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.virtualathlete.myfitness.R
 import com.virtualathlete.myfitness.di.ActivityScoped
 import com.virtualathlete.myfitness.model.Workout
@@ -23,7 +20,6 @@ import com.virtualathlete.myfitness.model.WorkoutType
 import com.virtualathlete.myfitness.workout.WorkoutDetailActivity
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_feed.*
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -33,13 +29,13 @@ import javax.inject.Inject
 
 @ActivityScoped
 class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.OnClickItemListener, View.OnClickListener {
-    private lateinit var databaseRef: DatabaseReference
     private lateinit var workoutAdapter: WorkoutViewAdapter
     private lateinit var viewModel: FeedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        databaseRef = FirebaseDatabase.getInstance().reference
+
+        setHasOptionsMenu(true)
 
         // Get the ViewModel.
         viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
@@ -51,6 +47,27 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val appCompatActivity = activity as AppCompatActivity
+        appCompatActivity.setSupportActionBar(toolbar)
+        appCompatActivity.supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.workout_navigation, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.action_favorite -> {
+                //switchFeedModeListener?.onSwitchFeedMode()
+                super.onOptionsItemSelected(item)
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

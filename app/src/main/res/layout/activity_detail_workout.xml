@@ -34,7 +34,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="?attr/homeAsUpIndicator" />
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
