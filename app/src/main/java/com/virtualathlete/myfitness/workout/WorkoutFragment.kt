@@ -4,6 +4,7 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
@@ -54,7 +55,7 @@ class WorkoutFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapt
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_favorite -> {
-                switchFeedModeListener?.onSwitchFeedMode()
+                switchFeedModeListener?.onSwitchFeedMode(app_bar_layout)
                 super.onOptionsItemSelected(item)
             }
             else -> super.onOptionsItemSelected(item)
@@ -114,6 +115,6 @@ class WorkoutFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapt
     }
 
     public interface OnSwitchFeedModeListener{
-        public fun onSwitchFeedMode()
+        public fun onSwitchFeedMode(appBarLayout: AppBarLayout)
     }
 }

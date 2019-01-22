@@ -1,7 +1,10 @@
 package com.virtualathlete.myfitness
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.view.ViewCompat
+import android.support.v7.widget.Toolbar
 import com.virtualathlete.myfitness.feed.FeedFragment
 import com.virtualathlete.myfitness.workout.WorkoutFragment
 import dagger.android.support.DaggerAppCompatActivity
@@ -34,8 +37,12 @@ class MainActivity @Inject constructor() : DaggerAppCompatActivity(), WorkoutFra
         false
     }
 
-    override fun onSwitchFeedMode() {
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_frame_layout, feedFragment).commit()
+    override fun onSwitchFeedMode(appBarLayout: AppBarLayout) {
+        supportFragmentManager.beginTransaction()
+                .addSharedElement(appBarLayout, ViewCompat.getTransitionName(appBarLayout)!!)
+                .addToBackStack(feedFragment.javaClass.simpleName)
+                .replace(R.id.fragment_frame_layout, feedFragment)
+                .commit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

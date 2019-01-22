@@ -4,7 +4,9 @@ import android.app.ActivityOptions
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.transition.TransitionInflater
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -34,6 +36,9 @@ class FeedFragment @Inject constructor() : DaggerFragment(), WorkoutViewAdapter.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move);
+        }
 
         setHasOptionsMenu(true)
 
