@@ -37,30 +37,42 @@
             <LinearLayout
                 android:id="@+id/header_linear_layout"
                 android:layout_width="0dp"
-                android:layout_height="28dp"
+                android:layout_height="56dp"
                 android:orientation="horizontal"
-                android:background="#C0F9595B"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:text="10 WORK SETS"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/white"
-                    android:gravity="center_vertical"/>
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/benchpress"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
-                    android:text="60 % WORK LOAD"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/white"
-                    android:gravity="center_vertical|end"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="1 of 2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Bench Press" />
+
+                </LinearLayout>
 
             </LinearLayout>
             <!-- HEADER END -->

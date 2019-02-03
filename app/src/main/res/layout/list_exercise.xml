@@ -3,40 +3,107 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="8dp"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp">
+    android:layout_height="60dp">
 
-    <ImageButton
-        android:id="@+id/exercise_play_image_view"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:gravity="center"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <TextView
+        android:id="@+id/set"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Set 1"
+        android:textAllCaps="true"
+        android:textSize="16dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintHorizontal_weight="6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/test2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@mipmap/exercise" />
+        tools:text="Set 1" />
+
+    <LinearLayout
+        android:id="@+id/test2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/pace_text_view"
+        app:layout_constraintStart_toEndOf="@id/set"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/reps_count_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="8-10"
+            android:textSize="28dp"
+            app:layout_constraintBottom_toTopOf="@id/reps_text_view"
+            app:layout_constraintEnd_toStartOf="@id/pace_text_view"
+            app:layout_constraintStart_toEndOf="@id/set"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="8-10" />
+
+        <TextView
+            android:id="@+id/reps_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="reps"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/pace_text_view"
+            app:layout_constraintStart_toEndOf="@id/set"
+            app:layout_constraintTop_toBottomOf="@id/reps_count_text_view"
+            tools:text="reps" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/exercise_amount_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        app:layout_constraintStart_toEndOf="@+id/exercise_play_image_view"
-        app:layout_constraintEnd_toStartOf="@+id/exercise_name_text_view"
+        android:id="@+id/pace_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="20X1"
+        android:textSize="24dp"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/testar"
+        app:layout_constraintStart_toEndOf="@id/test2"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="100 M" />
+        tools:text="20X1" />
 
-    <TextView
-        android:id="@+id/exercise_name_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
+    <LinearLayout
+        android:id="@+id/testar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintStart_toEndOf="@id/pace_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/exercise_amount_text_view"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="RUN" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/weight_unit_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:gravity="start"
+            android:text="80"
+            android:textSize="28dp"
+            tools:text="80" />
+
+        <TextView
+            android:id="@+id/unit_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:gravity="start"
+            android:text="kg"
+            android:textSize="12dp"
+            tools:text="%" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

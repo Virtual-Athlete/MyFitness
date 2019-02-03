@@ -24,7 +24,7 @@ class WorkoutSetViewAdapter : RecyclerView.Adapter<WorkoutSetViewAdapter.ViewHol
     }
 
     override fun getItemCount(): Int {
-        return 20
+        return 1
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -18,7 +18,7 @@ class ExerciseViewAdapter : RecyclerView.Adapter<ExerciseViewAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems("")
+        holder.bindItems("", position)
     }
 
     override fun getItemCount(): Int {
@@ -26,10 +26,12 @@ class ExerciseViewAdapter : RecyclerView.Adapter<ExerciseViewAdapter.ViewHolder>
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindItems(items: String) {
-            itemView.exercise_play_image_view.setImageBitmap(BitmapFactory.decodeResource(itemView.context.resources, R.mipmap.exercise))
-            itemView.exercise_amount_text_view.text = "100 M"
-            itemView.exercise_name_text_view.text = "RUN"
+        fun bindItems(items: String, position: Int) {
+            //itemView.exercise_play_image_view.setImageBitmap(BitmapFactory.decodeResource(itemView.context.resources, R.mipmap.exercise))
+            //itemView.exercise_amount_text_view.text = "100 M"
+            //itemView.exercise_name_text_view.text = "RUN"
+            var count = position + 1
+            itemView.set.text = "Set $count"
         }
     }
 }
