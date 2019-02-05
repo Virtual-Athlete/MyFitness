@@ -49,25 +49,25 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/testar"
-                    android:layout_width="54dp"
-                    android:layout_height="54dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/benchpress"/>
+                    <ImageView
+                        android:id="@+id/testar"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/benchpress"/>
 
-                <ImageView
-                    android:layout_width="54dp"
-                    android:layout_height="54dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintTop_toBottomOf="@+id/testar"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:src="@mipmap/benchpress"/>
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintTop_toBottomOf="@+id/testar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:src="@mipmap/benchpress"/>
                 </LinearLayout>
 
                 <LinearLayout
